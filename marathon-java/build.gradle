@@ -19,15 +19,15 @@ repositories {
 }
 
 dependencies {
-  compile project(":marathon-core")
-  testCompile "org.testng:testng:${testng_version}"
-  testCompile project(":marathon-java:marathon-test-helpers")
-  testCompile project(":marathon-java")
-  testCompile project(":marathon-java:marathon-java-driver")
-  testCompile project(":marathon-java:marathon-java-agent")
-  testCompile project(":marathon-java:marathon-java-recorder")
-  testCompile project(":marathon-java:marathon-java-runtime")
-  testCompile project(":marathon-core:ruby-selenium-webdriver")
+  implementation project(":marathon-core")
+  testImplementation "org.testng:testng:${testng_version}"
+  testImplementation project(":marathon-java:marathon-test-helpers")
+  testImplementation project(":marathon-java")
+  testImplementation project(":marathon-java:marathon-java-driver")
+  testImplementation project(":marathon-java:marathon-java-agent")
+  testImplementation project(":marathon-java:marathon-java-recorder")
+  testImplementation project(":marathon-java:marathon-java-runtime")
+  testImplementation project(":marathon-core:ruby-selenium-webdriver")
 }
 
 test {

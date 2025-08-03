@@ -37,28 +37,28 @@ sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
 dependencies {
-  compile project(":marathon-recording-server")
-  compile project(":marathon-core-base")
-  compile "org.jruby:jrubyparser:${jrubyparser_version}"
-  compile project(":marathon-json")
-  compile project(":marathon-java:marathon-java-driver")
-  compile "junit:junit-dep:${junit_dep_version}"
-  compile "org.seleniumhq.selenium:selenium-java:${selenium_java_version}"
-  compile "org.yaml:snakeyaml:${snakeyaml_version}"
-  compile "net.sf.opencsv:opencsv:${opencsv_version}"
-  compile "com.google.inject:guice:${guice_version}"
-  compile "org.jruby:jruby-complete:${jruby_complete_version}"
-  compile "commons-io:commons-io:${commons_io_version}"
-  compile "org.java-websocket:Java-WebSocket:${java_websocket_version}"
-  compile "ru.yandex.qatools.allure:allure-junit-adaptor:${allure_version}"
-  compile "ru.yandex.qatools.allure:allure-commandline:${allure_version}"
-  compile "ru.yandex.qatools.allure:allure-bundle:${allure_version}"
-  compile "jline:jline:${jline_version}"
-  compile "org.nanohttpd:nanohttpd-webserver:${nanohttpd_version}"
-  compile "org.jfxtras:jmetro:${jmetro_version}"
-  compile "org.controlsfx:controlsfx:${controlsfx_version}"
-  testCompile "org.testng:testng:${testng_version}"
-  testCompile project(":marathon-javafx:marathon-javafx-agent")
+  implementation project(":marathon-recording-server")
+  implementation project(":marathon-core-base")
+  implementation "org.jruby:jrubyparser:${jrubyparser_version}"
+  implementation project(":marathon-json")
+  implementation project(":marathon-java:marathon-java-driver")
+  implementation "junit:junit-dep:${junit_dep_version}"
+  implementation "org.seleniumhq.selenium:selenium-java:${selenium_java_version}"
+  implementation "org.yaml:snakeyaml:${snakeyaml_version}"
+  implementation "net.sf.opencsv:opencsv:${opencsv_version}"
+  implementation "com.google.inject:guice:${guice_version}"
+  implementation "org.jruby:jruby-complete:${jruby_complete_version}"
+  implementation "commons-io:commons-io:${commons_io_version}"
+  implementation "org.java-websocket:Java-WebSocket:${java_websocket_version}"
+  implementation "ru.yandex.qatools.allure:allure-junit-adaptor:${allure_version}"
+  implementation "ru.yandex.qatools.allure:allure-commandline:${allure_version}"
+  implementation "ru.yandex.qatools.allure:allure-bundle:${allure_version}"
+  implementation "jline:jline:${jline_version}"
+  implementation "org.nanohttpd:nanohttpd-webserver:${nanohttpd_version}"
+  implementation "org.jfxtras:jmetro:${jmetro_version}"
+  implementation "org.controlsfx:controlsfx:${controlsfx_version}"
+  testImplementation "org.testng:testng:${testng_version}"
+  testImplementation project(":marathon-javafx:marathon-javafx-agent")
 }
 
 test {

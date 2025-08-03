@@ -25,8 +25,8 @@ dependencies {
 
 jar.doFirst{
   manifest {
-    def classpath = configurations.runtime.filter{ it.name.startsWith 'marathon' }.collect { it.name } +
-              configurations.runtime.filter{ !it.name.startsWith('marathon') }.collect { 'support/' + it.name }
+    def classpath = configurations.runtimeOnly.filter{ it.name.startsWith 'marathon' }.collect { it.name } +
+              configurations.runtimeOnly.filter{ !it.name.startsWith('marathon') }.collect { 'support/' + it.name }
     Properties props = new Properties()
     props.load(new FileInputStream(project(":marathon").file('build.properties')))
     props.put("marathonversion", "${version}")

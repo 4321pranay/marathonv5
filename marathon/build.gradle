@@ -21,27 +21,27 @@ repositories {
 apply plugin: 'distribution'
 
 dependencies {
-  compile project(":marathon-core")
-  runtime project(":marathon")
-  runtime project(":marathon-java")
-  runtime project(":marathon-web")
-  runtime project(":marathon-web:marathon-web-runtime")
-  runtime project(":marathon-java:marathon-java-driver")
-  runtime project(":marathon-java:marathon-java-agent")
-  runtime project(":marathon-java:marathon-java-recorder")
-  runtime project(":marathon-java:marathon-java-runtime")
-  runtime project(":marathon-javafx")
-  runtime project(":marathon-javafx:marathon-javafx-agent")
-  runtime project(":marathon-javafx:marathon-javafx-recorder")
-  runtime project(":marathon-javafx:marathon-javafx-runtime")
-  runtime project(":marathon-core:ruby-selenium-webdriver")
-  runtime project(":marathon-json")
+  implementation project(":marathon-core")
+  runtimeOnly project(":marathon")
+  runtimeOnly project(":marathon-java")
+  runtimeOnly project(":marathon-web")
+  runtimeOnly project(":marathon-web:marathon-web-runtime")
+  runtimeOnly project(":marathon-java:marathon-java-driver")
+  runtimeOnly project(":marathon-java:marathon-java-agent")
+  runtimeOnly project(":marathon-java:marathon-java-recorder")
+  runtimeOnly project(":marathon-java:marathon-java-runtime")
+  runtimeOnly project(":marathon-javafx")
+  runtimeOnly project(":marathon-javafx:marathon-javafx-agent")
+  runtimeOnly project(":marathon-javafx:marathon-javafx-recorder")
+  runtimeOnly project(":marathon-javafx:marathon-javafx-runtime")
+  runtimeOnly project(":marathon-core:ruby-selenium-webdriver")
+  runtimeOnly project(":marathon-json")
 }
 
 jar.doFirst{
   manifest {
-    def classpath = configurations.runtime.filter{ it.name.startsWith 'marathon-' }.collect { it.name } +
-              configurations.runtime.filter{ !it.name.startsWith('marathon-') }.collect { 'support/' + it.name }
+            def classpath = configurations.runtimeOnly.filter{ it.name.startsWith 'marathon-' }.collect { it.name } +
+              configurations.runtimeOnly.filter{ !it.name.startsWith('marathon-') }.collect { 'support/' + it.name }
     Properties props = new Properties()
     props.load(new FileInputStream(file('build.properties')))
     props.put("marathonversion", "${version}")
@@ -62,18 +62,18 @@ jar.doFirst{
 task startScripts(type: Copy) {
     destinationDir file("$buildDir/scripts")
     from('script-templates/marathon') {
-      expand( [ 'marathonJar' : jar.archiveName, ])
+      expand( [ 'marathonJar' : jar.archiveFileName.get(), ])
       fileMode(0755)
     }
     from('script-templates/marathon.bat') {
-      expand( [ 'marathonJar' : jar.archiveName, ])
+      expand( [ 'marathonJar' : jar.archiveFileName.get(), ])
     }
     from('script-templates/simple-web-server') {
-      expand( [ 'marathonJar' : jar.archiveName, ])
+      expand( [ 'marathonJar' : jar.archiveFileName.get(), ])
       fileMode(0755)
     }
     from('script-templates/simple-web-server.bat') {
-      expand( [ 'marathonJar' : jar.archiveName, ])
+      expand( [ 'marathonJar' : jar.archiveFileName.get(), ])
     }
     from('script-templates/mruby') {
       expand( [ 'rubyJar' : "jruby-complete-${jruby_complete_version}.jar", "version" : "${version}" ])
@@ -102,11 +102,11 @@ distributions {
   main {
     contents {
       duplicatesStrategy = "exclude"
-      from(configurations.runtime) {
+      from(configurations.runtimeOnly) {
         exclude('**/marathon*jar')
         into('support')
       }
-      from(configurations.runtime) {
+      from(configurations.runtimeOnly) {
         include('**/marathon*jar')
       }
       from(project(':marathon-jenkins').file('build/libs'))
@@ -123,11 +123,11 @@ distributions {
       }
       from(project(':marathon-web').file('src/main/dist'))
       from(project(':marathon-web').file('chrome-extension/marathon-chrome-extension.crx'))
-      from(project(':marathon-java:marathon-kbmap-tool').configurations.runtime) {
+      from(project(':marathon-java:marathon-kbmap-tool').configurations.runtimeOnly) {
         exclude('**/marathon*jar')
         into('support')
       }
-      from(project(':marathon-java:marathon-kbmap-tool').configurations.runtime) {
+      from(project(':marathon-java:marathon-kbmap-tool').configurations.runtimeOnly) {
         include('**/marathon*jar')
       }
       from(project(':marathon-java:marathon-kbmap-tool').jar)
